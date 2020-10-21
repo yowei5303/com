@@ -5,6 +5,7 @@
 #include <string.h>
 #include <strstream>
 #define MAX 80
+//考
 using namespace std;
 void inToPostfix(char*, char*); // 中序轉後序 
 int priority(char); // 運算子優先權
