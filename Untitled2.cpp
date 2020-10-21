@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string.h>
 #include <strstream>
+#include <cmath>
 #define MAX 80
 //¦Ò
 using namespace std;
@@ -61,6 +62,13 @@ int main(void) {
 	        	num.pop();
 	        	num.push(date);
 	        	break;
+	        case '^':
+	        	a=num.top();
+	        	num.pop();
+	        	date=pow(num.top(),a);
+	        	num.pop();
+	        	num.push(date);
+	        	break;
 	        case ']':
 	        	if(!s.empty())
 	        	{
@@ -100,7 +108,7 @@ void inToPostfix(char* infix, char* postfix) {
 			}
             stack[++top] = infix[i]; 
             break; 
-        case '+': case '-': case '*': case '/': 
+        case '+': case '-': case '*': case '/':case '^': 
         	if(F==true)
         	{
         		postfix[j++]=']';
@@ -144,7 +152,7 @@ void inToPostfix(char* infix, char* postfix) {
 int priority(char op) { 
     switch(op) { 
         case '+': case '-': return 1;
-        case '*': case '/': return 2;
+        case '*': case '/': case '^': return 2;
         default:            return 0;
     } 
 } 
