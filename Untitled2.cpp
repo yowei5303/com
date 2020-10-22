@@ -11,6 +11,7 @@ using namespace std;
 void inToPostfix(char*, char*); // 中序轉後序 
 int priority(char); // 運算子優先權
 double todouble(string);
+bool error;
 int count=0;
 int main(void) { 
     char infix[MAX] = {'\0'}; 
@@ -58,6 +59,7 @@ int main(void) {
 			case '/':
 			 	a=num.top();
 	        	num.pop();
+	        	if(a==0) error=0;
 	        	date=num.top()/a;
 	        	num.pop();
 	        	num.push(date);
@@ -91,7 +93,8 @@ int main(void) {
 		
     
 	}
-	cout<<date;
+	if(!error) cout<<"N/A";
+	else cout<<date;
 	return 0; 
 }
 
@@ -127,6 +130,7 @@ void inToPostfix(char* infix, char* postfix) {
 			}
             while(stack[top] != '(') { // 遇 ) 輸出至 ( 
                 postfix[j++] = stack[top--];
+                if(top==0) error=0;
             } 
             top--;  // 不輸出 ( 
             break; 
@@ -144,7 +148,8 @@ void inToPostfix(char* infix, char* postfix) {
     	postfix[j++]=']';
         F=false;
 	}
-    while(top > 0) { 
+    while(top > 0) {
+		if(stack[top]=='(') error=0;
         postfix[j++] = stack[top--];
     }
 } 
